@@ -1,0 +1,32 @@
+ Container(
+                      height: 50.0,
+                      color: Colors.amber.withOpacity(.6),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.info_outline),
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Expanded(child: Text('please verify your email ')),
+                            SizedBox(width: 20),
+                            defaultTextButton(
+                              onPress: () {
+                                FirebaseAuth.instance.currentUser!
+                                    .sendEmailVerification()
+                                    .then((value) {
+                                  ShowToast(
+                                      text: 'check your mail ',
+                                      state: ToastStates.SUCCESS);
+                                }).catchError((error) {
+                                  print(error.toString());
+                                });
+                              },
+                              text: 'send ',
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+               
